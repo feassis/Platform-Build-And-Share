@@ -7517,7 +7517,7 @@ MonoBehaviour:
   tileLibrary: {fileID: 11400000, guid: 0427a63ba9de2f6488159a2b3bce150a, type: 2}
   interactableLibrary: {fileID: 11400000, guid: 70d75d74d13627e44902388c3ec2c40c, type: 2}
   HoverDetection: {fileID: 1801867275}
-  uiAnimator: {fileID: 943018334}
+  uiAnimator: {fileID: 0}
   panelUIs:
   - {fileID: 448532557}
   - {fileID: 10984924}

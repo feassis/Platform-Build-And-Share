@@ -55,4 +55,12 @@ public class LevelCreatorManager : MonoBehaviour
             OnPlaymodeEnd?.Invoke();
         }
     }
+
+    public void EndGameLoop(EndGameType endGame)
+    {
+        if(endGame == EndGameType.Victory)
+        {
+            ToggleGameMode(false);
+        }
+    }
 }

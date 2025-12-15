@@ -13,4 +13,5 @@ public struct TileEntry
 public enum InteractableType
 {
     PlayerSpawn = 0,
+    EndGameSpawn = 1,
 }

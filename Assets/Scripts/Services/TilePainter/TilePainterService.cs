@@ -20,7 +20,13 @@ public class TilePainterService : MonoBehaviour
 
     [SerializeField] private HoverDetection HoverDetection;
 
+    [SerializeField] private Animator uiAnimator;
+
     [SerializeField] private List<TabUI> panelUIs;
+
+
+    private const string MOVE_OUT_ANIM = "MoveOut";
+    private const string MOVE_IN_ANIM = "MoveIn";
 
     private Dictionary<Vector3Int, Interactables> interactableObjects = new Dictionary<Vector3Int, Interactables>();
 
@@ -77,12 +83,14 @@ public class TilePainterService : MonoBehaviour
     private void LevelCreatorManager_OnPlaymodeEnd()
     {
         isPlaying = false;
+        uiAnimator.Play(MOVE_IN_ANIM);
     }
 
     private void LevelCreatorManager_OnPlaymodeStart()
     {
         isPlaying = true;
         Cursor.gameObject.SetActive(false);
+        uiAnimator.Play(MOVE_OUT_ANIM);
     }
 
     private void Interactables_OnInteractableDestruction(Interactables interactableOnjectToBeRemoved)

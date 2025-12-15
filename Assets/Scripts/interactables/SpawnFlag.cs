@@ -38,4 +38,3 @@ public class SpawnFlag : Interactables
         player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
     }
 }
-

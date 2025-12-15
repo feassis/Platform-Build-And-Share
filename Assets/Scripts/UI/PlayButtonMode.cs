@@ -12,28 +12,37 @@ public class PlayButtonMode : MonoBehaviour
     private void Awake()
     {
         playButton.onClick.AddListener(() => PlayModeToggle(true));
-        stopButton.onClick.AddListener( () => PlayModeToggle(false));
+        stopButton.onClick.AddListener(() => PlayModeToggle(false));
+    }
+        
+    private void Start()
+    {
+        
+    }
+
+    private void LevelCreatorManager_OnPlaymodeStart()
+    {
+        playButton.gameObject.SetActive(false);
+        stopButton.gameObject.SetActive(true);
+    }
+
+    private void LevelCreatorManager_OnPlaymodeEnd()
+    {
+        playButton.gameObject.SetActive(true);
+        stopButton.gameObject.SetActive(false);
     }
 
     private void PlayModeToggle(bool playMode)
     {
-        if (playMode)
-        {
-            playButton.gameObject.SetActive(false);
-            stopButton.gameObject.SetActive(true);
-        }
-        else
-        {
-            playButton.gameObject.SetActive(true);
-            stopButton.gameObject.SetActive(false);
-        }
-
         levelCreatorManager.ToggleGameMode(playMode);
     }
 
     public void Init(LevelCreatorManager levelCreatorManager)
     {
         this.levelCreatorManager = levelCreatorManager;
+
+        levelCreatorManager.OnPlaymodeStart += LevelCreatorManager_OnPlaymodeStart;
+        levelCreatorManager.OnPlaymodeEnd += LevelCreatorManager_OnPlaymodeEnd;
     }
 
 

@@ -303,7 +303,6 @@ public class PlayerMovement : MonoBehaviour
     #region RUN METHODS
     private void Run(float lerpAmount)
     {
-        Debug.Log("##########################################################");
         //Calculate the direction we want to move in and our desired velocity
         float targetSpeed = moveInput.x * Data.runMaxSpeed;
         
@@ -350,9 +349,6 @@ public class PlayerMovement : MonoBehaviour
         //Calculate force along x-axis to apply to thr player
 
         float movement = speedDif * accelRate;
-
-        Debug.Log($"Move input {moveInput} | Targuet speed {targetSpeed} " +
-            $"| speedDif {speedDif}  | accelRate {accelRate} | movement {movement}");
 
         //Convert this to a vector and apply to rigidbody
         RB.AddForce(movement * Vector2.right, ForceMode2D.Force);
