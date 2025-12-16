@@ -22,6 +22,8 @@ public class TilePainterService : MonoBehaviour
 
     [SerializeField] private Animator uiAnimator;
 
+    [SerializeField] private Button saveButton;
+
     [SerializeField] private List<TabUI> panelUIs;
 
 
@@ -39,6 +41,8 @@ public class TilePainterService : MonoBehaviour
     private TileLayer currentLayer;
 
     private LevelCreatorManager levelCreatorManager;
+    private LevelSaverService levelSaverService;
+    private LevelLoaderService levelLoaderService;
 
     [Serializable]
     protected struct TileConfig
@@ -63,6 +67,13 @@ public class TilePainterService : MonoBehaviour
         {
             panel.OnTabButtonClicked += Panel_OnTabButtonClicked;
         }
+
+        saveButton.onClick.AddListener(OnSaveButtonClicked);
+    }
+
+    private void OnSaveButtonClicked()
+    {
+        levelSaverService.SaveLevel("Teste", interactableObjects, BackGround, BeforeGround, Ground, InteractablesGround, DecorationGround, ForeGround);
     }
 
     public void UnselectEverything()
@@ -72,12 +83,21 @@ public class TilePainterService : MonoBehaviour
         Cursor.gameObject.SetActive(false);
     }
 
-    public void Init(LevelCreatorManager levelCreatorManager)
+    public void Init(LevelCreatorManager levelCreatorManager, LevelSaverService levelSaverService, LevelLoaderService levelLoaderService)
     {
         this.levelCreatorManager = levelCreatorManager;
 
         this.levelCreatorManager.OnPlaymodeStart += LevelCreatorManager_OnPlaymodeStart;
         this.levelCreatorManager.OnPlaymodeEnd += LevelCreatorManager_OnPlaymodeEnd;
+
+        this.levelSaverService = levelSaverService;
+        this.levelLoaderService = levelLoaderService;
+    }
+
+    public void LoadMap(string mapName)
+    {
+        levelLoaderService.LoadLevel(mapName, interactableObjects, BackGround, BeforeGround, Ground, 
+            InteractablesGround, DecorationGround, ForeGround);
     }
 
     private void LevelCreatorManager_OnPlaymodeEnd()
@@ -175,8 +195,7 @@ public class TilePainterService : MonoBehaviour
         if (!Camera.main) return;
 
         if (islocked || isPlaying) return;
-
-        
+             
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 

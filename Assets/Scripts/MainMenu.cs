@@ -12,10 +12,16 @@ public class MainMenu : MonoBehaviour
     private void Awake()
     {
         CreateLevelButton.onClick.AddListener(OnCreateButtonClicked);
+        LoadLevelButton.onClick.AddListener(OnLoadButtonClicked);
+    }
+
+    private void OnLoadButtonClicked()
+    {
+        LevelCreatorManager.Open(false, "Teste");
     }
 
     private void OnCreateButtonClicked()
     {
-        SceneManager.LoadScene("MapCreator");
+        LevelCreatorManager.Open(true);
     }
 }

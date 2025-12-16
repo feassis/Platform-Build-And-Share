@@ -8,4 +8,6 @@ public class InteractableLibrary : ScriptableObject
     public Interactables GetInteractable(InteractableType interactableType) => interactableLibrary.Find(t => t.InteractableType == interactableType).Interactable;
 
     public InteractableEntry GetInteractableEntry(InteractableType interactableType) => interactableLibrary.Find(t => t.InteractableType == interactableType);
+
+    public InteractableType GetInteractableTile(Interactables interactable) => interactableLibrary.Find(t => t.Interactable.Equals(interactable)).InteractableType;
 }

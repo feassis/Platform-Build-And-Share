@@ -9,4 +9,6 @@ public class TileLibrary : ScriptableObject
     public TileBase GetTile(TileType tileType) => tileLibrary.Find(t => t.TileType == tileType).Tile;
 
     public TileEntry GetTileEntry(TileType tileType) => tileLibrary.Find(t => t.TileType == tileType);
+
+    public TileType GetTileType(TileBase tile) => tileLibrary.Find(t => t.Tile.Equals(tile)).TileType;
 }
