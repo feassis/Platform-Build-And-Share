@@ -13,11 +13,17 @@ public class MainMenu : MonoBehaviour
     {
         CreateLevelButton.onClick.AddListener(OnCreateButtonClicked);
         LoadLevelButton.onClick.AddListener(OnLoadButtonClicked);
+        LevelsButton.onClick.AddListener(OnPlayLEvelButtonClicked);
+    }
+
+    private void OnPlayLEvelButtonClicked()
+    {
+        SceneManager.LoadScene("PlayMenu");
     }
 
     private void OnLoadButtonClicked()
     {
-        LevelCreatorManager.Open(false, "Teste");
+        SceneManager.LoadScene("LoadMenu");
     }
 
     private void OnCreateButtonClicked()

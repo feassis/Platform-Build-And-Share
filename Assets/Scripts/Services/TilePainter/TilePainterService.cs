@@ -5,18 +5,9 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
-public class TilePainterService : MonoBehaviour
+public class TilePainterService : LevelPainterService
 {
-    [SerializeField] private Tilemap BackGround;
-    [SerializeField] private Tilemap BeforeGround;
-    [SerializeField] private Tilemap Ground;    
-    [SerializeField] private Tilemap InteractablesGround;
-    [SerializeField] private Tilemap DecorationGround;
-    [SerializeField] private Tilemap ForeGround;
     [SerializeField] private Image Cursor;
-
-    [SerializeField] private TileLibrary tileLibrary;
-    [SerializeField] private InteractableLibrary interactableLibrary;
 
     [SerializeField] private HoverDetection HoverDetection;
 
@@ -24,38 +15,29 @@ public class TilePainterService : MonoBehaviour
 
     [SerializeField] private Button saveButton;
 
-    [SerializeField] private List<TabUI> panelUIs;
+    [SerializeField] private SavePopupUI savePopupUI;
 
+    [SerializeField] private List<TabUI> panelUIs;
 
     private const string MOVE_OUT_ANIM = "MoveOut";
     private const string MOVE_IN_ANIM = "MoveIn";
 
-    private Dictionary<Vector3Int, Interactables> interactableObjects = new Dictionary<Vector3Int, Interactables>();
-
+    
     private Interactables interactable;
     private TileBase currentTile;
     private Tilemap currentTileMap;
     private bool islocked;
+    private bool isSaveLocked;
     private bool isPlaying;
-
-    private TileLayer currentLayer;
-
-    private LevelCreatorManager levelCreatorManager;
-    private LevelSaverService levelSaverService;
-    private LevelLoaderService levelLoaderService;
-
-    [Serializable]
-    protected struct TileConfig
-    {
-        public TileType TileType;
-        public TileBase Tile;
-    }
 
     private void Awake()
     {
         TileSelectButton.OnTileSelect += TileSelectButton_OnTileSelect;
         InteractableSelectButton.OnInteractabelSelect += InteractableSelectButton_OnInteractabelSelect;
         Interactables.OnInteractableDestruction += Interactables_OnInteractableDestruction;
+
+        savePopupUI.OnSaveConfirm += SavePopupUI_OnSaveConfirm;
+        savePopupUI.OnSavePopupClose += SavePopupUI_OnSavePopupClose;
 
         HoverDetection.OnMouseEnter += () => islocked = true;
         HoverDetection.OnMouseExit += () => islocked = false;
@@ -71,9 +53,20 @@ public class TilePainterService : MonoBehaviour
         saveButton.onClick.AddListener(OnSaveButtonClicked);
     }
 
+    private void SavePopupUI_OnSavePopupClose()
+    {
+        isSaveLocked = false;
+    }
+
     private void OnSaveButtonClicked()
     {
-        levelSaverService.SaveLevel("Teste", interactableObjects, BackGround, BeforeGround, Ground, InteractablesGround, DecorationGround, ForeGround);
+        savePopupUI.gameObject.SetActive(true);
+        isSaveLocked = true;
+    }
+
+    private void SavePopupUI_OnSaveConfirm(string saveName)
+    {
+        levelSaverService.SaveLevel(saveName, interactableObjects, BackGround, BeforeGround, Ground, InteractablesGround, DecorationGround, ForeGround);
     }
 
     public void UnselectEverything()
@@ -83,30 +76,25 @@ public class TilePainterService : MonoBehaviour
         Cursor.gameObject.SetActive(false);
     }
 
-    public void Init(LevelCreatorManager levelCreatorManager, LevelSaverService levelSaverService, LevelLoaderService levelLoaderService)
+    public override void Init(LevelManager levelManager, LevelSaverService levelSaverService, LevelLoaderService levelLoaderService)
     {
-        this.levelCreatorManager = levelCreatorManager;
+        base.Init(levelManager, levelSaverService, levelLoaderService);
 
-        this.levelCreatorManager.OnPlaymodeStart += LevelCreatorManager_OnPlaymodeStart;
-        this.levelCreatorManager.OnPlaymodeEnd += LevelCreatorManager_OnPlaymodeEnd;
+        this.levelManager.OnPlaymodeStart += LevelCreatorManager_OnPlaymodeStart;
+        this.levelManager.OnPlaymodeEnd += LevelCreatorManager_OnPlaymodeEnd;
 
-        this.levelSaverService = levelSaverService;
-        this.levelLoaderService = levelLoaderService;
+        savePopupUI.Init(levelLoaderService);
     }
 
-    public void LoadMap(string mapName)
-    {
-        levelLoaderService.LoadLevel(mapName, interactableObjects, BackGround, BeforeGround, Ground, 
-            InteractablesGround, DecorationGround, ForeGround);
-    }
+    
 
-    private void LevelCreatorManager_OnPlaymodeEnd()
+    protected void LevelCreatorManager_OnPlaymodeEnd()
     {
         isPlaying = false;
         uiAnimator.Play(MOVE_IN_ANIM);
     }
 
-    private void LevelCreatorManager_OnPlaymodeStart()
+    protected void LevelCreatorManager_OnPlaymodeStart()
     {
         isPlaying = true;
         Cursor.gameObject.SetActive(false);
@@ -154,7 +142,7 @@ public class TilePainterService : MonoBehaviour
         }
     }
 
-    public void SelectTileMap(TileLayer tileLayer)
+    protected void SelectTileMap(TileLayer tileLayer)
     {
         currentLayer = tileLayer;
 
@@ -194,7 +182,7 @@ public class TilePainterService : MonoBehaviour
     {
         if (!Camera.main) return;
 
-        if (islocked || isPlaying) return;
+        if (islocked || isPlaying || isSaveLocked) return;
              
 
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -258,4 +246,3 @@ public class TilePainterService : MonoBehaviour
         Cursor.gameObject.SetActive(true);
     }
 }
-

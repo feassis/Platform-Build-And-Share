@@ -19,13 +19,13 @@ public class SpawnFlag : Interactables
 
         Instance = this;
 
-        LevelCreatorManager.Instance.TilePainterService.UnselectEverything();
+        (LevelManager.Instance.LevelPainterService as TilePainterService).UnselectEverything();
     }
 
     private void Start()
     {
-        LevelCreatorManager.Instance.OnPlaymodeStart += Instance_OnPlaymodeStart;
-        LevelCreatorManager.Instance.OnPlaymodeEnd += Instance_OnPlaymodeEnd;
+        LevelManager.Instance.OnPlaymodeStart += Instance_OnPlaymodeStart;
+        LevelManager.Instance.OnPlaymodeEnd += Instance_OnPlaymodeEnd;
     }
 
     private void Instance_OnPlaymodeEnd()
@@ -35,6 +35,7 @@ public class SpawnFlag : Interactables
 
     private void Instance_OnPlaymodeStart()
     {
+        Debug.Log("Spawn played");
         player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
     }
 }

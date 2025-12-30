@@ -16,14 +16,17 @@ public class EndFlag : Interactables
 
         Instance = this;
 
-        LevelCreatorManager.Instance.TilePainterService.UnselectEverything();
+        if (LevelManager.Instance.LevelPainterService is TilePainterService)
+        {
+            (LevelManager.Instance.LevelPainterService as TilePainterService).UnselectEverything();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent<Player>(out player))
         {
-            LevelCreatorManager.Instance.EndGameLoop(EndGameType.Victory);
+            LevelManager.Instance.EndGameLoop(EndGameType.Victory);
         }
     }
 }

@@ -55,7 +55,7 @@ public class LevelSaverService
             Directory.CreateDirectory(path);
         }
 
-        File.WriteAllText(path + $"/{saveName}", json);
+        File.WriteAllText(path + $"/{saveName}.json", json);
         Debug.Log($"Mapa salvo! At: {path + $"/{saveName}"}  | data: {json}");
 
 

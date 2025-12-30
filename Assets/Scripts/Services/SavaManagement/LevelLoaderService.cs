@@ -18,6 +18,16 @@ public class LevelLoaderService
         this.tileLibrary = tileLibrary;
         this.interactableLibrary = interactableLibrary;
     }
+    public bool SaveExists(string saveName)
+    {
+        string path = Path.Combine(
+            Application.dataPath,
+            folderPath,
+            saveName
+        );
+
+        return File.Exists(path);
+    }
 
     public void LoadLevel(
         string saveName,
@@ -30,7 +40,7 @@ public class LevelLoaderService
         Tilemap foreground,
         Transform interactablesParent = null)
     {
-        string path = Application.dataPath + $"/{folderPath}/{saveName}";
+        string path = Application.dataPath + $"/{folderPath}/{saveName}.json";
 
         if (!File.Exists(path))
         {
