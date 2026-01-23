@@ -9,6 +9,10 @@ public class LoadlLeveEditorMenu : LevelLoader
     {
         foreach(var lsoption in levelSaveOptions)
         {
+            if(lsoption == null)
+            {
+                continue;
+            }
             Destroy(lsoption.gameObject);
         }
 
@@ -19,7 +23,8 @@ public class LoadlLeveEditorMenu : LevelLoader
             saveOption.Init(save);
             saveOption.onPlayButtonClicked += SaveOption_onPlayButtonClicked;
             saveOption.onDeleteButtonClicked += SaveOption_onDeleteButtonClicked;
-            saveOption.onSelectButtonClicked += SaveOption_onSelectButtonClicked;
+            saveOption.onSelectButtonClicked += SaveOption_onSelectButtonClicked; 
+            saveOption.onShareButtonClicked += SaveOption_onShareButtonClicked;
 
             levelSaveOptions.Add(saveOption);
         }

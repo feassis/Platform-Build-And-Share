@@ -5,6 +5,8 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] protected TileLibrary tileLibrary;
     [SerializeField] protected InteractableLibrary interactableLibrary;
+    [SerializeField] protected float deathboxDownOffset = 20;
+    [SerializeField] protected Deathbox deathboxPrefab;
 
     [field: SerializeField] public LevelPainterService LevelPainterService { get; private set; }
     public static LevelManager Instance { get; private set; }
@@ -17,6 +19,8 @@ public class LevelManager : MonoBehaviour
 
     public event Action OnPlaymodeStart;
     public event Action OnPlaymodeEnd;
+
+    protected Deathbox deathbox;
 
     protected GameMode gameMode;
 
@@ -70,11 +74,13 @@ public class LevelManager : MonoBehaviour
         {
             gameMode = GameMode.PlayMode;
             OnPlaymodeStart?.Invoke();
+            StartGameCleanUp();
         }
         else
         {
             gameMode = GameMode.MapEditorMode;
             OnPlaymodeEnd?.Invoke();
+            EndGameCleanUp();
         }
     }
 
@@ -85,4 +91,27 @@ public class LevelManager : MonoBehaviour
             ToggleGameMode(false);
         }
     }
+
+    protected virtual void StartGameCleanUp()
+    {
+        deathbox = Instantiate<Deathbox>(deathboxPrefab);
+        deathbox.OnPlayerDeathboxEnter += Deathbox_OnPlayerDeathboxEnter;
+
+        LevelPainterService.FitBoxColliderBelowLevel(deathbox.GetComponent<BoxCollider2D>(), deathboxDownOffset);
+    }
+
+    private void Deathbox_OnPlayerDeathboxEnter(Player player)
+    {
+        player.Death();
+    }
+
+    protected virtual void EndGameCleanUp()
+    {
+        deathbox.OnPlayerDeathboxEnter -= Deathbox_OnPlayerDeathboxEnter;
+        Destroy(deathbox.gameObject);
+    }
+
+
+    
+
 }

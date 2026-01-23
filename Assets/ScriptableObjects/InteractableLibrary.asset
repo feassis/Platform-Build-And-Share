@@ -19,3 +19,12 @@ MonoBehaviour:
   - InteractableType: 1
     Interactable: {fileID: 5713588853808860002, guid: 695ee6feaacd7a944b134d3b1cff8512, type: 3}
     CursorIcon: {fileID: -8004016223982600864, guid: f027d206fb3ca8c449e1bc99d6032bd5, type: 3}
+  - InteractableType: 2
+    Interactable: {fileID: 2511731930035570320, guid: 44e1af9254ec8ca48acf18576f42680d, type: 3}
+    CursorIcon: {fileID: -5448302008940547093, guid: 4585d83a42e5a674aab8617128ad1ed6, type: 3}
+  - InteractableType: 3
+    Interactable: {fileID: 3087839252190937688, guid: 62265b986c97e854c8f83f1fadb4bd8f, type: 3}
+    CursorIcon: {fileID: -1079420907993194747, guid: 48e0a1db0878fc44da628fa0d5b51330, type: 3}
+  - InteractableType: 4
+    Interactable: {fileID: 5759947543400467162, guid: 64b15d3881e9b44498cdb72fd66c5e93, type: 3}
+    CursorIcon: {fileID: 6267657852976931682, guid: b8e9b13187b93464c8932c94aeefe8b2, type: 3}

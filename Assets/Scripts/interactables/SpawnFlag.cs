@@ -35,7 +35,12 @@ public class SpawnFlag : Interactables
 
     private void Instance_OnPlaymodeStart()
     {
-        Debug.Log("Spawn played");
         player = Instantiate(playerPrefab, spawnPos.position, spawnPos.rotation);
+        player.SetSpawnFlag(this);
+    }
+
+    public void Respawn(Player player)
+    {
+        player.transform.position = spawnPos.position;
     }
 }

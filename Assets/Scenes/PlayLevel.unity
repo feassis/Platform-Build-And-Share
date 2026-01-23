@@ -6439,6 +6439,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayLevelManager
   tileLibrary: {fileID: 11400000, guid: 0427a63ba9de2f6488159a2b3bce150a, type: 2}
   interactableLibrary: {fileID: 11400000, guid: 70d75d74d13627e44902388c3ec2c40c, type: 2}
+  deathboxDownOffset: 5
+  deathboxPrefab: {fileID: 4952084255529324868, guid: 90a41059cbe78b943a329ce5291da015, type: 3}
   <LevelPainterService>k__BackingField: {fileID: 1955276260}
 --- !u!1 &1449921719
 GameObject:

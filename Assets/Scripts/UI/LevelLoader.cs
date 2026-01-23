@@ -9,6 +9,7 @@ public class LevelLoader : MonoBehaviour
     [SerializeField] protected RectTransform scrollViewContent;
     [SerializeField] protected LevelSaveOption levelSaveOption;
     [SerializeField] protected Button mainMenuButton;
+    [SerializeField] protected AddSaveMenu addSaveMenu;
 
     protected List<LevelSaveOption> levelSaveOptions = new List<LevelSaveOption>();
 
@@ -19,8 +20,13 @@ public class LevelLoader : MonoBehaviour
         SetupLevelSaveOptions(saves);
 
         mainMenuButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu"));
+        addSaveMenu.OnSaveAdded += AddSaveMenu_OnSaveAdded;
     }
 
+    private void AddSaveMenu_OnSaveAdded()
+    {
+        SetupLevelSaveOptions(GetAllSaves());
+    }
 
     protected virtual void SaveOption_onSelectButtonClicked(string saveName)
     {
@@ -72,8 +78,40 @@ public class LevelLoader : MonoBehaviour
             saveOption.Init(save);
             saveOption.onPlayButtonClicked += SaveOption_onPlayButtonClicked;
             saveOption.onSelectButtonClicked += SaveOption_onSelectButtonClicked;
+            saveOption.onShareButtonClicked += SaveOption_onShareButtonClicked;
 
             levelSaveOptions.Add(saveOption);
+        }
+    }
+
+    protected bool TryGetSaveJson(string saveName, out string json)
+    {
+        json = null;
+
+        string path = Application.dataPath +
+                      $"/{GameConstants.SAVE_FOLDER_PATH}/{saveName}.json";
+
+        if (!File.Exists(path))
+        {
+            Debug.LogWarning($"Save not found: {path}");
+            return false;
+        }
+
+        json = File.ReadAllText(path);
+        return true;
+    }
+
+
+    protected void SaveOption_onShareButtonClicked(string sharedLevel)
+    {
+        if(TryGetSaveJson(sharedLevel, out string saveJson))
+        {
+            var encodedJson = JsonEncoder.Encode(saveJson);
+            GUIUtility.systemCopyBuffer = encodedJson;
+        }
+        else
+        {
+            Debug.LogError("Save Not Found");
         }
     }
 }

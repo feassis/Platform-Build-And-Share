@@ -21,6 +21,7 @@ public class LevelSaverService
         Tilemap beforeground, Tilemap ground, Tilemap interactablesground, Tilemap decorationground, Tilemap foreground)
     {
         LevelData levelData = new LevelData();
+        levelData.Name = saveName;
 
         levelData.backgroundtiles = ExtractTilesFromTileMap(background);
         levelData.beforegroundtiles = ExtractTilesFromTileMap(beforeground);
@@ -48,6 +49,12 @@ public class LevelSaverService
         levelData.interactables = interactableRecords;
 
         string json = JsonUtility.ToJson(levelData, true);
+        SaveLevelJson(saveName, folderPath, json);
+
+    }
+
+    public static void SaveLevelJson(string saveName, string folderPath, string json)
+    {
         string path = Application.dataPath + $"/{folderPath}";
 
         if (!Directory.Exists(path))
@@ -57,8 +64,6 @@ public class LevelSaverService
 
         File.WriteAllText(path + $"/{saveName}.json", json);
         Debug.Log($"Mapa salvo! At: {path + $"/{saveName}"}  | data: {json}");
-
-
     }
 
     public List<TileRecord> ExtractTilesFromTileMap(Tilemap tilemap)
@@ -96,17 +101,4 @@ public class InteractablesRocord
 {
     public InteractableType interactableType;
     public int x, y, z;
-}
-
-[System.Serializable] 
-public class LevelData 
-{ 
-    public List<TileRecord> backgroundtiles = new List<TileRecord>(); 
-    public List<TileRecord> beforegroundtiles = new List<TileRecord>(); 
-    public List<TileRecord> groundtiles = new List<TileRecord>(); 
-    public List<TileRecord> interactablesgroundtiles = new List<TileRecord>(); 
-    public List<TileRecord> decorationgroundtiles = new List<TileRecord>(); 
-    public List<TileRecord> foregroundtiles = new List<TileRecord>(); 
-
-    public List<InteractablesRocord> interactables = new List<InteractablesRocord>();
 }

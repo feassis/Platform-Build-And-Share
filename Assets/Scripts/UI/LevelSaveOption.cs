@@ -7,6 +7,7 @@ public class LevelSaveOption : MonoBehaviour
 {
     [SerializeField] private Button playButton;
     [SerializeField] private Button deleteButton;
+    [SerializeField] private Button shareButton;
     [SerializeField] private Button selectButton;
     [SerializeField] private TextMeshProUGUI saveNameText;
 
@@ -14,6 +15,7 @@ public class LevelSaveOption : MonoBehaviour
 
     public event Action<string> onPlayButtonClicked;
     public event Action<string> onDeleteButtonClicked;
+    public event Action<string> onShareButtonClicked;
     public event Action<string> onSelectButtonClicked;
 
     public void Init(string saveName)
@@ -27,6 +29,7 @@ public class LevelSaveOption : MonoBehaviour
     {
         playButton.onClick.AddListener((() => onPlayButtonClicked?.Invoke(saveName)));
         deleteButton.onClick.AddListener(() =>  onDeleteButtonClicked?.Invoke(saveName));
+        shareButton.onClick.AddListener(() => onShareButtonClicked?.Invoke(saveName));
         selectButton.onClick.AddListener(() => onSelectButtonClicked?.Invoke(saveName));
     }
 }

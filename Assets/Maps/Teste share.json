@@ -1,0 +1,209 @@
+{
+    "Name": "Teste share",
+    "backgroundtiles": [],
+    "beforegroundtiles": [],
+    "groundtiles": [
+        {
+            "tileType": 0,
+            "x": -12,
+            "y": -4
+        },
+        {
+            "tileType": 0,
+            "x": -12,
+            "y": -3
+        },
+        {
+            "tileType": 0,
+            "x": -11,
+            "y": -5
+        },
+        {
+            "tileType": 0,
+            "x": -11,
+            "y": -4
+        },
+        {
+            "tileType": 0,
+            "x": -11,
+            "y": -3
+        },
+        {
+            "tileType": 0,
+            "x": -11,
+            "y": -2
+        },
+        {
+            "tileType": 0,
+            "x": -10,
+            "y": -5
+        },
+        {
+            "tileType": 0,
+            "x": -10,
+            "y": -4
+        },
+        {
+            "tileType": 0,
+            "x": -10,
+            "y": -3
+        },
+        {
+            "tileType": 0,
+            "x": -10,
+            "y": -2
+        },
+        {
+            "tileType": 0,
+            "x": -9,
+            "y": -5
+        },
+        {
+            "tileType": 0,
+            "x": -9,
+            "y": -4
+        },
+        {
+            "tileType": 0,
+            "x": -9,
+            "y": -3
+        },
+        {
+            "tileType": 0,
+            "x": -8,
+            "y": -5
+        },
+        {
+            "tileType": 0,
+            "x": -8,
+            "y": -4
+        },
+        {
+            "tileType": 0,
+            "x": -8,
+            "y": -3
+        },
+        {
+            "tileType": 0,
+            "x": -7,
+            "y": -5
+        },
+        {
+            "tileType": 0,
+            "x": -7,
+            "y": -4
+        },
+        {
+            "tileType": 0,
+            "x": -1,
+            "y": -3
+        },
+        {
+            "tileType": 0,
+            "x": -1,
+            "y": -2
+        },
+        {
+            "tileType": 0,
+            "x": -1,
+            "y": -1
+        },
+        {
+            "tileType": 0,
+            "x": 0,
+            "y": -3
+        },
+        {
+            "tileType": 0,
+            "x": 0,
+            "y": -2
+        },
+        {
+            "tileType": 0,
+            "x": 0,
+            "y": -1
+        },
+        {
+            "tileType": 0,
+            "x": 0,
+            "y": 0
+        },
+        {
+            "tileType": 0,
+            "x": 1,
+            "y": -2
+        },
+        {
+            "tileType": 0,
+            "x": 1,
+            "y": -1
+        },
+        {
+            "tileType": 0,
+            "x": 1,
+            "y": 0
+        },
+        {
+            "tileType": 0,
+            "x": 2,
+            "y": -2
+        },
+        {
+            "tileType": 0,
+            "x": 2,
+            "y": -1
+        },
+        {
+            "tileType": 0,
+            "x": 2,
+            "y": 0
+        },
+        {
+            "tileType": 0,
+            "x": 3,
+            "y": -2
+        },
+        {
+            "tileType": 0,
+            "x": 3,
+            "y": -1
+        },
+        {
+            "tileType": 0,
+            "x": 3,
+            "y": 0
+        },
+        {
+            "tileType": 0,
+            "x": 4,
+            "y": -2
+        },
+        {
+            "tileType": 0,
+            "x": 4,
+            "y": -1
+        },
+        {
+            "tileType": 0,
+            "x": 4,
+            "y": 0
+        }
+    ],
+    "interactablesgroundtiles": [],
+    "decorationgroundtiles": [],
+    "foregroundtiles": [],
+    "interactables": [
+        {
+            "interactableType": 1,
+            "x": 3,
+            "y": 1,
+            "z": 0
+        },
+        {
+            "interactableType": 0,
+            "x": -11,
+            "y": -1,
+            "z": 0
+        }
+    ]
+}

@@ -14,4 +14,7 @@ public enum InteractableType
 {
     PlayerSpawn = 0,
     EndGameSpawn = 1,
+    FloorTrap = 2,
+    FloorSpike = 3,
+    WallArrowTrapRight = 4
 }
