@@ -16,5 +16,6 @@ public enum InteractableType
     EndGameSpawn = 1,
     FloorTrap = 2,
     FloorSpike = 3,
-    WallArrowTrapRight = 4
+    WallArrowTrapRight = 4,
+    PassThroughPlatform = 5,
 }

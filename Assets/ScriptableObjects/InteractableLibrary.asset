@@ -28,3 +28,6 @@ MonoBehaviour:
   - InteractableType: 4
     Interactable: {fileID: 5759947543400467162, guid: 64b15d3881e9b44498cdb72fd66c5e93, type: 3}
     CursorIcon: {fileID: 6267657852976931682, guid: b8e9b13187b93464c8932c94aeefe8b2, type: 3}
+  - InteractableType: 5
+    Interactable: {fileID: 5339771547267618499, guid: 6ed97623becbed340b13a5a137341be1, type: 3}
+    CursorIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}

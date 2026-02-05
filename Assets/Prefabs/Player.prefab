@@ -92,10 +92,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   Data: {fileID: 11400000, guid: fb46c5d1d0cfb684eb4b13ed5c41ca26, type: 2}
   _groundCheckPoint: {fileID: 457171672120051656}
-  _groundCheckSize: {x: 0.53, y: 0.03}
+  _groundCheckSize: {x: 0.45, y: 0.03}
   _frontWallCheckPoint: {fileID: 1093203849604318900}
   _backWallCheckPoint: {fileID: 3144635559037137906}
-  _wallCheckSize: {x: 0.05, y: 1.04}
+  _wallCheckSize: {x: 0.11, y: 1.04}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
