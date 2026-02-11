@@ -18,4 +18,5 @@ public enum InteractableType
     FloorSpike = 3,
     WallArrowTrapRight = 4,
     PassThroughPlatform = 5,
+    JumpingPad = 6,
 }

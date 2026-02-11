@@ -31,12 +31,16 @@ public class PlayerMovement : MonoBehaviour
     public bool IsJumping { get; private set; }
     public bool IsWallJumping { get; private set; }
     public bool IsSliding { get; private set; }
+    public bool IsBouncing { get; private set; }
+
 
     //Timers (also all fields, could be private and a method returning a bool could be used)
     public float LastOnGroundTime { get; private set; }
     public float LastOnWallTime { get; private set; }
     public float LastOnWallRightTime { get; private set; }
     public float LastOnWallLeftTime { get; private set; }
+
+    public float LastBounceTime { get; private set; }
 
     //Jump
     private bool _isJumpCut;
@@ -149,6 +153,12 @@ public class PlayerMovement : MonoBehaviour
         LastOnWallTime -= Time.deltaTime;
         LastOnWallRightTime -= Time.deltaTime;
         LastOnWallLeftTime -= Time.deltaTime;
+        LastBounceTime -= Time.deltaTime;
+
+        if (LastBounceTime <= 0)
+        {
+            IsBouncing = false;
+        }
 
         LastPressedJumpTime -= Time.deltaTime;
         #endregion
@@ -257,7 +267,7 @@ public class PlayerMovement : MonoBehaviour
             SetGravityScale(Data.gravityScale * Data.jumpCutGravityMult);
             RB.linearVelocity = new Vector2(RB.linearVelocity.x, Mathf.Max(RB.linearVelocity.y, -Data.maxFallSpeed));
         }
-        else if ((IsJumping || IsWallJumping || _isJumpFalling) && Mathf.Abs(RB.linearVelocity.y) < Data.jumpHangTimeThreshold)
+        else if ((IsJumping || IsWallJumping || _isJumpFalling ) && Mathf.Abs(RB.linearVelocity.y) < Data.jumpHangTimeThreshold)
         {
             SetGravityScale(Data.gravityScale * Data.jumpHangGravityMult);
         }
@@ -287,6 +297,8 @@ public class PlayerMovement : MonoBehaviour
         //Handle Slide
         if (IsSliding)
             Slide();
+
+        //Debug.Log($"Current Linear Velocity: {RB.linearVelocity}");
     }
 
     #region INPUT CALLBACKS
@@ -336,7 +348,7 @@ public class PlayerMovement : MonoBehaviour
 
         #region Add Bonus Jump Apex Acceleration
         //Increase are acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
-        if ((IsJumping || IsWallJumping || _isJumpFalling) && Mathf.Abs(RB.linearVelocity.y) < Data.jumpHangTimeThreshold)
+        if ((IsJumping || IsWallJumping || _isJumpFalling ) && Mathf.Abs(RB.linearVelocity.y) < Data.jumpHangTimeThreshold)
         {
             accelRate *= Data.jumpHangAccelerationMult;
             targetSpeed *= Data.jumpHangMaxSpeedMult;
@@ -427,6 +439,30 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     #region OTHER MOVEMENT METHODS
+    public void Bounce(Vector2 forceVector, float duration)
+    {
+        if (LastBounceTime > 0)
+        {
+            return;
+        }
+
+        IsBouncing = true;
+        IsJumping = false;
+        IsWallJumping = false;
+        _isJumpCut = false;
+        _isJumpFalling = false;
+        LastBounceTime = duration;
+        LastPressedJumpTime = 0;
+        LastOnGroundTime = 0;
+
+        #region Perform Bounce
+
+        RB.linearVelocity = Vector2.zero;
+        RB.AddForce(forceVector, ForceMode2D.Impulse);
+
+        #endregion
+    }
+
     private void Slide()
     {
         //Works the same as the Run but only in the y-axis
@@ -439,6 +475,8 @@ public class PlayerMovement : MonoBehaviour
 
         RB.AddForce(movement * Vector2.up);
     }
+
+    
     #endregion
 
 
@@ -451,13 +489,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CanJump()
     {
-        return LastOnGroundTime > 0 && !IsJumping;
+        return LastOnGroundTime > 0 && !IsJumping && !IsBouncing;
     }
 
     private bool CanWallJump()
     {
         return LastPressedJumpTime > 0 && LastOnWallTime > 0 && LastOnGroundTime <= 0 && (!IsWallJumping ||
-             (LastOnWallRightTime > 0 && _lastWallJumpDir == 1) || (LastOnWallLeftTime > 0 && _lastWallJumpDir == -1));
+             (LastOnWallRightTime > 0 && _lastWallJumpDir == 1) || (LastOnWallLeftTime > 0 && _lastWallJumpDir == -1)) && !IsBouncing;
     }
 
     private bool CanJumpCut()
@@ -472,12 +510,13 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CanSlide()
     {
-        if (LastOnWallTime > 0 && !IsJumping && !IsWallJumping && LastOnGroundTime <= 0)
+        if (LastOnWallTime > 0 && !IsJumping && !IsWallJumping && LastOnGroundTime <= 0 && !IsBouncing)
             return true;
         else
             return false;
     }
     #endregion
+
 
 
     #region EDITOR METHODS
@@ -489,5 +528,7 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireCube(_frontWallCheckPoint.position, _wallCheckSize);
         Gizmos.DrawWireCube(_backWallCheckPoint.position, _wallCheckSize);
     }
+
+    
     #endregion
 }
