@@ -19,4 +19,6 @@ public enum InteractableType
     WallArrowTrapRight = 4,
     PassThroughPlatform = 5,
     JumpingPad = 6,
+    Door = 7,
+    Switch = 8,
 }

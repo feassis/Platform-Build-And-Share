@@ -17,6 +17,8 @@ public class LevelManager : MonoBehaviour
     protected static bool isNewMap = true;
     protected static string levelName;
 
+    public event Action<GameMode> OnGameModeChange;
+
     public event Action OnPlaymodeStart;
     public event Action OnPlaymodeEnd;
 
@@ -24,13 +26,7 @@ public class LevelManager : MonoBehaviour
 
     protected GameMode gameMode;
 
-    protected enum GameMode
-    {
-        MapEditorMode = 0,
-        PlayMode = 1,
-        StartUpMode = 2,
-        DeathMode = 3
-    }
+
 
 
     protected virtual void Awake()
@@ -48,6 +44,8 @@ public class LevelManager : MonoBehaviour
         InitilizaServices();
 
     }
+
+    public GameMode GetGameMode() => gameMode;
 
 
     protected virtual void CreateService()
@@ -67,20 +65,26 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
-    public void ToggleGameMode(bool goToPlay)
+    public void ChangeGameMode(GameMode gameMode)
     {
-        if (goToPlay)
+        this.gameMode = gameMode;
+        OnGameModeChange?.Invoke(gameMode);
+        switch (gameMode)
         {
-            gameMode = GameMode.PlayMode;
-            OnPlaymodeStart?.Invoke();
-            StartGameCleanUp();
-        }
-        else
-        {
-            gameMode = GameMode.MapEditorMode;
-            OnPlaymodeEnd?.Invoke();
-            EndGameCleanUp();
+            case GameMode.MapEditorMode:
+                OnPlaymodeEnd?.Invoke();
+                EndGameCleanUp();
+                break;
+            case GameMode.PlayMode:
+                OnPlaymodeStart?.Invoke();
+                StartGameCleanUp();
+                break;
+            case GameMode.StartUpMode:
+                break;
+            case GameMode.DeathMode:
+                break;
+            case GameMode.ConnectionMode:
+                break;
         }
     }
 
@@ -88,7 +92,7 @@ public class LevelManager : MonoBehaviour
     {
         if (endGame == EndGameType.Victory)
         {
-            ToggleGameMode(false);
+            ChangeGameMode(GameMode.MapEditorMode);
         }
     }
 
@@ -107,11 +111,16 @@ public class LevelManager : MonoBehaviour
 
     protected virtual void EndGameCleanUp()
     {
-        deathbox.OnPlayerDeathboxEnter -= Deathbox_OnPlayerDeathboxEnter;
-        Destroy(deathbox.gameObject);
+        try
+        {
+            deathbox.OnPlayerDeathboxEnter -= Deathbox_OnPlayerDeathboxEnter;
+            Destroy(deathbox.gameObject);
+        }
+        catch
+        {
+
+        }
+        
     }
-
-
-    
 
 }

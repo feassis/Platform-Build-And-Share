@@ -34,7 +34,7 @@ public class PlayButtonMode : MonoBehaviour
 
     private void PlayModeToggle(bool playMode)
     {
-        levelCreatorManager.ToggleGameMode(playMode);
+        levelCreatorManager.ChangeGameMode(playMode ? GameMode.PlayMode : GameMode.MapEditorMode);
     }
 
     public void Init(LevelCreatorManager levelCreatorManager)

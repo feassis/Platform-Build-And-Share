@@ -180,6 +180,11 @@ public class TilePainterService : LevelPainterService
 
     void Update()
     {
+        if(LevelManager.Instance.GetGameMode() != GameMode.MapEditorMode)
+        {
+            return;
+        }
+
         if (!Camera.main) return;
 
         if (islocked || isPlaying || isSaveLocked) return;

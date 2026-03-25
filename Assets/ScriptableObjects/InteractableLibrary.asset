@@ -34,3 +34,9 @@ MonoBehaviour:
   - InteractableType: 6
     Interactable: {fileID: 4350515695581304773, guid: 07e42ed1bfaf18c4aa6d8b2f9d6491e8, type: 3}
     CursorIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - InteractableType: 7
+    Interactable: {fileID: 639050286398293074, guid: c2e4df0ddf1f562448a01796e61928f5, type: 3}
+    CursorIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  - InteractableType: 8
+    Interactable: {fileID: 8755560628039943409, guid: d86a5e7058fa440418700e32bc6b6e57, type: 3}
+    CursorIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}

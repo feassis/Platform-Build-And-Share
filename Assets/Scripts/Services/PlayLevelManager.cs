@@ -22,6 +22,7 @@ public class PlayLevelManager : LevelManager
     private IEnumerator StartGame()
     {
         yield return null;
-        ToggleGameMode(true);
+        ChangeGameMode(GameMode.PlayMode);
     }
+
 }

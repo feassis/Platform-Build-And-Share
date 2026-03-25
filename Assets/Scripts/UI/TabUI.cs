@@ -13,14 +13,17 @@ public class TabUI : MonoBehaviour
 
     public TileLayer GetTileLayer() => tileLayer;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         button.onClick.AddListener(() => OnTabButtonClicked?.Invoke(this));
     }
 
-    public void Activate(bool isActive)
+    public virtual void Activate(bool isActive)
     {
         deactivationLayer.SetActive(!isActive);
         panel.SetActive(isActive);
     }
+
+
+
 }
