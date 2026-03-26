@@ -11,6 +11,7 @@ public class Interactables : MonoBehaviour
     public virtual void OnDestroy()
     {
         OnInteractableDestruction?.Invoke(this);
+        Debug.Log("Destroyed");
     }
 
 }

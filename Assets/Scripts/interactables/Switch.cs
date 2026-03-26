@@ -34,7 +34,6 @@ public class Switch : Interactables, IPointerEnterHandler, IPointerExitHandler
         
         if ((collision.TryGetComponent<Player>(out Player player)))
         {
-            Debug.Log("Test");
             OnActivation?.Invoke();
         }
     }

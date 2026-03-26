@@ -37,7 +37,6 @@ public class Door : Interactables
 
     private void ToggleDoorStage()
     {
-        Debug.Log("ToggleDoor");
         if(currentDoor == DoorMode.Opened)
         {
             Close();
@@ -51,7 +50,6 @@ public class Door : Interactables
 
     private void Close()
     {
-        Debug.Log("Try to Close");
         opened.SetActive(false);
         closed.SetActive(true);
         colisionObj.SetActive(true);

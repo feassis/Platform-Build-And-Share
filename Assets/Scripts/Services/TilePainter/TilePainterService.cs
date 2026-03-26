@@ -34,7 +34,6 @@ public class TilePainterService : LevelPainterService
     {
         TileSelectButton.OnTileSelect += TileSelectButton_OnTileSelect;
         InteractableSelectButton.OnInteractabelSelect += InteractableSelectButton_OnInteractabelSelect;
-        Interactables.OnInteractableDestruction += Interactables_OnInteractableDestruction;
 
         savePopupUI.OnSaveConfirm += SavePopupUI_OnSaveConfirm;
         savePopupUI.OnSavePopupClose += SavePopupUI_OnSavePopupClose;
@@ -101,17 +100,6 @@ public class TilePainterService : LevelPainterService
         uiAnimator.Play(MOVE_OUT_ANIM);
     }
 
-    private void Interactables_OnInteractableDestruction(Interactables interactableOnjectToBeRemoved)
-    {
-        if (interactableObjects.ContainsKey(interactableOnjectToBeRemoved.Position))
-        {
-            if (!interactableOnjectToBeRemoved.IsDestroyed())
-            {
-                Destroy(interactableOnjectToBeRemoved.gameObject);
-            }
-            interactableObjects.Remove(interactableOnjectToBeRemoved.Position);
-        }
-    }
 
     private void InteractableSelectButton_OnInteractabelSelect(InteractableType type)
     {
@@ -241,7 +229,13 @@ public class TilePainterService : LevelPainterService
 
     private void DestroyInteractable(Vector3Int cellPos)
     {
-        Destroy(interactableObjects[cellPos].gameObject);
+        if (!interactableObjects.ContainsKey(cellPos))
+            return;
+
+        var interactable = interactableObjects[cellPos];
+
+        Destroy(interactable.gameObject);
+        interactableObjects[cellPos] = null;
         interactableObjects.Remove(cellPos);
     }
 

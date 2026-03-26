@@ -291,6 +291,15 @@ namespace Inputs
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""a2038414-7333-4352-9cea-bc30d1abaad3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -302,6 +311,17 @@ namespace Inputs
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78d9368e-4bac-49b5-981f-2f6bafefd585"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -318,6 +338,7 @@ namespace Inputs
             // Tools
             m_Tools = asset.FindActionMap("Tools", throwIfNotFound: true);
             m_Tools_Click = m_Tools.FindAction("Click", throwIfNotFound: true);
+            m_Tools_RightClick = m_Tools.FindAction("RightClick", throwIfNotFound: true);
         }
 
         ~@PlayerInputs()
@@ -518,6 +539,7 @@ namespace Inputs
         private readonly InputActionMap m_Tools;
         private List<IToolsActions> m_ToolsActionsCallbackInterfaces = new List<IToolsActions>();
         private readonly InputAction m_Tools_Click;
+        private readonly InputAction m_Tools_RightClick;
         /// <summary>
         /// Provides access to input actions defined in input action map "Tools".
         /// </summary>
@@ -533,6 +555,10 @@ namespace Inputs
             /// Provides access to the underlying input action "Tools/Click".
             /// </summary>
             public InputAction @Click => m_Wrapper.m_Tools_Click;
+            /// <summary>
+            /// Provides access to the underlying input action "Tools/RightClick".
+            /// </summary>
+            public InputAction @RightClick => m_Wrapper.m_Tools_RightClick;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -562,6 +588,9 @@ namespace Inputs
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
             }
 
             /// <summary>
@@ -576,6 +605,9 @@ namespace Inputs
                 @Click.started -= instance.OnClick;
                 @Click.performed -= instance.OnClick;
                 @Click.canceled -= instance.OnClick;
+                @RightClick.started -= instance.OnRightClick;
+                @RightClick.performed -= instance.OnRightClick;
+                @RightClick.canceled -= instance.OnRightClick;
             }
 
             /// <summary>
@@ -652,6 +684,13 @@ namespace Inputs
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnClick(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "RightClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnRightClick(InputAction.CallbackContext context);
         }
     }
 }
