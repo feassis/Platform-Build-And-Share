@@ -1745,23 +1745,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: -8187603139087087694, guid: 6a2c199bd78657741ad4caed75b544a1, type: 3}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.b
-      value: 0.49968848
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.g
-      value: 0.5361394
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.r
-      value: 0.5377358
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2609315518829068371, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: interactableType
@@ -3138,6 +3138,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ToolManager
   connectionLinePrefab: {fileID: 1257625203380366988, guid: 9189a811993a0d746a4f3b3227903538, type: 3}
+  connectionLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  InteractableLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!4 &617611703
 Transform:
   m_ObjectHideFlags: 0
@@ -3911,23 +3917,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: -7356698697374350207, guid: 86a5a8c2452f71241ab63dfdf296a990, type: 3}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.b
-      value: 0.3186632
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.g
-      value: 0.8562941
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.r
-      value: 0.8773585
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2609315518829068371, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: interactableType
@@ -4147,12 +4153,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 2637484143725954682, guid: 6cdf1ca628096fa408d4555ca65cf51b, type: 3}
     - target: {fileID: 2609315518829068371, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: interactableType
       value: 5
@@ -9144,23 +9150,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: -1324316005690313720, guid: 87ebfd8eec1a35a419ba2d3cc59cd303, type: 3}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.b
-      value: 0.08552865
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.g
-      value: 0.40098172
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2557642246809892544, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: m_Color.r
-      value: 0.5849056
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2609315518829068371, guid: b83221e25d2611846a3a60d52794f919, type: 3}
       propertyPath: interactableType

@@ -30,13 +30,13 @@ MonoBehaviour:
     CursorIcon: {fileID: 6267657852976931682, guid: b8e9b13187b93464c8932c94aeefe8b2, type: 3}
   - InteractableType: 5
     Interactable: {fileID: 5339771547267618499, guid: 6ed97623becbed340b13a5a137341be1, type: 3}
-    CursorIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    CursorIcon: {fileID: 2637484143725954682, guid: 6cdf1ca628096fa408d4555ca65cf51b, type: 3}
   - InteractableType: 6
     Interactable: {fileID: 4350515695581304773, guid: 07e42ed1bfaf18c4aa6d8b2f9d6491e8, type: 3}
-    CursorIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    CursorIcon: {fileID: -7356698697374350207, guid: 86a5a8c2452f71241ab63dfdf296a990, type: 3}
   - InteractableType: 7
     Interactable: {fileID: 639050286398293074, guid: c2e4df0ddf1f562448a01796e61928f5, type: 3}
-    CursorIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    CursorIcon: {fileID: -1324316005690313720, guid: 87ebfd8eec1a35a419ba2d3cc59cd303, type: 3}
   - InteractableType: 8
     Interactable: {fileID: 8755560628039943409, guid: d86a5e7058fa440418700e32bc6b6e57, type: 3}
-    CursorIcon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    CursorIcon: {fileID: -8187603139087087694, guid: 6a2c199bd78657741ad4caed75b544a1, type: 3}

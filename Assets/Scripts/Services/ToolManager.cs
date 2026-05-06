@@ -8,6 +8,7 @@ public class ToolManager : MonoBehaviour
 {
     [SerializeField] private ConnectionLine connectionLinePrefab;
     [SerializeField] private LayerMask connectionLayer;
+    [SerializeField] private LayerMask InteractableLayer;
 
     private ToolType currentTool = ToolType.None;
 
@@ -139,21 +140,44 @@ public class ToolManager : MonoBehaviour
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
         Vector2 worldPos = cam.ScreenToWorldPoint(mouseScreenPos);
 
-        RaycastHit2D hit = Physics2D.Raycast(worldPos, Vector2.zero);
+        Collider2D[] hits = Physics2D.OverlapPointAll(worldPos, InteractableLayer);
 
-        if (hit.collider == null)
+        if (hits.Length <= 0)
+        {
             return;
+        }
 
-        Interactables interactable = hit.collider.GetComponentInParent<Interactables>();
+        Interactables interactable = null;
+
+        foreach (var hit in hits)
+        {
+            interactable = hit.GetComponentInParent<Interactables>();
+        }
+
+        if(interactable == null)
+        {
+            return;
+        }
+        
 
         if(interactable is Door)
         {
+            if(currentDoor != null)
+            {
+                currentDoor.Deselected();
+            }
             currentDoor = (Door)interactable;
+            currentDoor.Selected();
             Debug.Log($"Door selected: {interactable.name}");
         }
         else if (interactable is Switch)
         {
+            if (currentSwitch != null)
+            {
+                currentSwitch.Deselected();
+            }
             currentSwitch = (Switch)interactable;
+            currentSwitch.Selected();
         }
 
 
@@ -174,6 +198,8 @@ public class ToolManager : MonoBehaviour
 
                 newConnection.Connection = connectionLine;
             }
+            currentDoor.Deselected();
+            currentSwitch.Deselected();
 
             currentDoor = null;
             currentSwitch = null;
