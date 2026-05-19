@@ -66,10 +66,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip jumpSound;
 
+    [Header("Vfx")]
+    [SerializeField] private GameObject dustCloud;
+    [Header("Visual")]
+    [SerializeField] private Transform visualBase;
+
     private bool _isTouchingWallRight;
     private bool _isTouchingWallLeft;
     private bool _isTouchingWall;
-
+    private bool _isOnGround;
     #endregion
 
     private void Awake()
@@ -179,15 +184,29 @@ public class PlayerMovement : MonoBehaviour
         #region COLLISION CHECKS
 
         // Ground Check
-        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping)
+        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer))
         {
-            LastOnGroundTime = Data.coyoteTime;
+            if (!IsJumping)
+            {
+                LastOnGroundTime = Data.coyoteTime;
+            }
+
+            if (!_isOnGround && !IsJumping && Mathf.Abs(RB.linearVelocityY) < 0.1f)
+            {
+                Instantiate(dustCloud, _groundCheckPoint.position, Quaternion.identity);
+                _isOnGround = true;
+            }
+
+        }
+        else
+        {
+            _isOnGround = false;
         }
 
-        // WALL CHECKS
-        _isTouchingWallRight =
-            (Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && IsFacingRight)
-            || (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight);
+            // WALL CHECKS
+            _isTouchingWallRight =
+                (Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && IsFacingRight)
+                || (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight);
 
         _isTouchingWallLeft =
             (Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight)
@@ -362,6 +381,7 @@ public class PlayerMovement : MonoBehaviour
             accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? Data.runAccelAmount * Data.accelInAir : Data.runDeccelAmount * Data.deccelInAir;
         #endregion
 
+       
 
         #region Add Bonus Jump Apex Acceleration
         //Increase are acceleration and maxSpeed when at the apex of their jump, makes the jump feel a bit more bouncy, responsive and natural
@@ -375,7 +395,8 @@ public class PlayerMovement : MonoBehaviour
 
         #region Conserve Momentum
         //We won't slow the player down if they are moving in their desired direction but at a greater speed than their maxSpeed
-        if (Data.doConserveMomentum && Mathf.Abs(RB.linearVelocity.x) > Mathf.Abs(targetSpeed) && Mathf.Sign(RB.linearVelocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && LastOnGroundTime < 0)
+        if (Data.doConserveMomentum && Mathf.Abs(RB.linearVelocity.x) > Mathf.Abs(targetSpeed) 
+            && Mathf.Sign(RB.linearVelocity.x) == Mathf.Sign(targetSpeed) && Mathf.Abs(targetSpeed) > 0.01f && LastOnGroundTime < 0)
         {
             //Prevent any deceleration from happening, or in other words conserve are current momentum
             //You could experiment with allowing for the player to slightly increae their speed whilst in this "state"
@@ -403,12 +424,13 @@ public class PlayerMovement : MonoBehaviour
     private void Turn()
     {
         //stores scale and flips the player along the x axis, 
-        Vector3 scale = transform.localScale;
+        Vector3 scale = visualBase.localScale;
         scale.x *= -1;
-        transform.localScale = scale;
+        visualBase.localScale = scale;
 
         IsFacingRight = !IsFacingRight;
     }
+
     #endregion
 
     #region JUMP METHODS
