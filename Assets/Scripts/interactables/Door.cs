@@ -7,6 +7,7 @@ public class Door : Interactables
     [SerializeField] private GameObject opened;
 
     [SerializeField] private GameObject colisionObj;
+    [SerializeField] private AudioClip doorSound;
 
     private DoorMode currentDoor;
 
@@ -37,6 +38,7 @@ public class Door : Interactables
 
     private void ToggleDoorStage()
     {
+        SoundManager.Instance.PlaySFX(doorSound, transform.position);
         if(currentDoor == DoorMode.Opened)
         {
             Close();

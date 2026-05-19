@@ -437,6 +437,7 @@ MonoBehaviour:
   closed: {fileID: 6053642786420949183}
   opened: {fileID: 4840927590159386867}
   colisionObj: {fileID: 4302897121881521994}
+  doorSound: {fileID: 8300000, guid: 4a474f7933a71454dbfb52a149cd5234, type: 3}
 --- !u!61 &7592262090128034810
 BoxCollider2D:
   m_ObjectHideFlags: 0

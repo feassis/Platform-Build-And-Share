@@ -63,6 +63,13 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Layers & Tags")]
     [SerializeField] private LayerMask _groundLayer;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip jumpSound;
+
+    private bool _isTouchingWallRight;
+    private bool _isTouchingWallLeft;
+    private bool _isTouchingWall;
+
     #endregion
 
     private void Awake()
@@ -170,27 +177,37 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region COLLISION CHECKS
-        //Ground Check
-        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping) //checks if set box overlaps with ground
+
+        // Ground Check
+        if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, _groundLayer) && !IsJumping)
         {
-            LastOnGroundTime = Data.coyoteTime; //if so sets the lastGrounded to coyoteTime
+            LastOnGroundTime = Data.coyoteTime;
         }
 
-        //Right Wall Check
-        if (((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && IsFacingRight)
-                || (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight)) && !IsWallJumping)
+        // WALL CHECKS
+        _isTouchingWallRight =
+            (Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && IsFacingRight)
+            || (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight);
+
+        _isTouchingWallLeft =
+            (Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight)
+            || (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && IsFacingRight);
+
+        _isTouchingWall = _isTouchingWallLeft || _isTouchingWallRight;
+
+        // Apply coyote time
+        if (_isTouchingWallRight && !IsWallJumping)
         {
             LastOnWallRightTime = Data.coyoteTime;
         }
-            
 
-        //Right Wall Check
-        if (((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && !IsFacingRight)
-            || (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, _groundLayer) && IsFacingRight)) && !IsWallJumping)
+        if (_isTouchingWallLeft && !IsWallJumping)
+        {
             LastOnWallLeftTime = Data.coyoteTime;
+        }
 
-        //Two checks needed for both left and right walls since whenever the play turns the wall checkPoints swap sides
         LastOnWallTime = Mathf.Max(LastOnWallLeftTime, LastOnWallRightTime);
+
         #endregion
 
         #region JUMP CHECKS
@@ -410,6 +427,7 @@ public class PlayerMovement : MonoBehaviour
             force -= RB.linearVelocity.y;
 
         RB.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+        SoundManager.Instance.PlaySFX(jumpSound, transform.position);
         #endregion
     }
 
@@ -494,8 +512,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CanWallJump()
     {
-        return LastPressedJumpTime > 0 && LastOnWallTime > 0 && LastOnGroundTime <= 0 && (!IsWallJumping ||
-             (LastOnWallRightTime > 0 && _lastWallJumpDir == 1) || (LastOnWallLeftTime > 0 && _lastWallJumpDir == -1)) && !IsBouncing;
+        return _isTouchingWall
+            && LastOnGroundTime <= 0
+            && !IsBouncing
+            && (!IsWallJumping
+            || (_isTouchingWallRight && _lastWallJumpDir == 1)
+            || (_isTouchingWallLeft && _lastWallJumpDir == -1));
     }
 
     private bool CanJumpCut()

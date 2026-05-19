@@ -8,6 +8,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] protected float deathboxDownOffset = 20;
     [SerializeField] protected Deathbox deathboxPrefab;
 
+    [Header("Sounds")]
+    [SerializeField] protected AudioClip Bgm;
+
     [field: SerializeField] public LevelPainterService LevelPainterService { get; private set; }
     public static LevelManager Instance { get; private set; }
 
@@ -102,6 +105,8 @@ public class LevelManager : MonoBehaviour
         deathbox.OnPlayerDeathboxEnter += Deathbox_OnPlayerDeathboxEnter;
 
         LevelPainterService.FitBoxColliderBelowLevel(deathbox.GetComponent<BoxCollider2D>(), deathboxDownOffset);
+
+        SoundManager.Instance.PlayBGM(Bgm);
     }
 
     private void Deathbox_OnPlayerDeathboxEnter(Player player)
@@ -115,6 +120,7 @@ public class LevelManager : MonoBehaviour
         {
             deathbox.OnPlayerDeathboxEnter -= Deathbox_OnPlayerDeathboxEnter;
             Destroy(deathbox.gameObject);
+            SoundManager.Instance.StopBGM();
         }
         catch
         {

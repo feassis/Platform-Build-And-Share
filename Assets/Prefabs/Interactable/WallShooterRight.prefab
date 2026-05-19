@@ -34,6 +34,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5647242043261309151
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -79,6 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 6267657852976931682, guid: b8e9b13187b93464c8932c94aeefe8b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -88,7 +90,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &4797987187131930096
 GameObject:
@@ -270,13 +271,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc990c95f91c97e468bc986b4b2030bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WallArrowTrap
-  <Type>k__BackingField: 0
+  <Type>k__BackingField: 4
+  selectedOutline: {fileID: 0}
   spawnPoint: {fileID: 3743475679944764101}
   shootingPoint: {fileID: 3406719222728221690}
   projectileSpeed: 12
   projectileLifeTime: 3
   cooldown: 4
   projectilePrefab: {fileID: 1257323487655374076, guid: c0d8de8fa93853942a4c6dccbe4992ad, type: 3}
+  dangerSound: {fileID: 8300000, guid: c81ceda11fb2ca3478840b60ad2e44e3, type: 3}
 --- !u!1 &8965881336626028474
 GameObject:
   m_ObjectHideFlags: 0

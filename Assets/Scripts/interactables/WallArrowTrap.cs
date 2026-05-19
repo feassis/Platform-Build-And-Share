@@ -11,6 +11,7 @@ public class WallArrowTrap : Interactables
     [SerializeField] private float projectileLifeTime;
     [SerializeField] private float cooldown;
     [SerializeField] private TrapProjectile projectilePrefab;
+    [SerializeField] private AudioClip dangerSound;
 
 
     private bool isActive = true;
@@ -54,6 +55,8 @@ public class WallArrowTrap : Interactables
         projectile.transform.position = spawnPoint.position;
 
         projectile.Setup(projectileSpeed, projectileLifeTime, (shootingPoint.position - spawnPoint.position).normalized);
+
+        SoundManager.Instance.PlaySFX(dangerSound, transform.position);
 
         StartCoroutine(CooldownRoutine());
     }

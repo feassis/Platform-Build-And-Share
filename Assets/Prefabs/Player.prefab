@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78181f117a9aff746b9be1e5710a25ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  deathSound: {fileID: 8300000, guid: c78d8e8d565ea5245bd01980eb911f9b, type: 3}
 --- !u!114 &2862043103825084516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,10 +96,11 @@ MonoBehaviour:
   _groundCheckSize: {x: 0.45, y: 0.03}
   _frontWallCheckPoint: {fileID: 1093203849604318900}
   _backWallCheckPoint: {fileID: 3144635559037137906}
-  _wallCheckSize: {x: 0.11, y: 1.04}
+  _wallCheckSize: {x: 0.11, y: 1}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  jumpSound: {fileID: 8300000, guid: e3ac12553043cd84a82709084819e98f, type: 3}
 --- !u!70 &7041720766589123053
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -133,8 +135,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
+  m_Offset: {x: -0.000043839216, y: 0.011609912}
+  m_Size: {x: 0.43156785, y: 1.0232198}
   m_Direction: 0
 --- !u!1 &5020193474759576205
 GameObject:
@@ -147,7 +149,7 @@ GameObject:
   - component: {fileID: 8304728993957924148}
   - component: {fileID: 1689336779953801624}
   m_Layer: 6
-  m_Name: Capsule
+  m_Name: Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +165,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6400618816003225861}
@@ -217,7 +219,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 15
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -4644718298645844666, guid: 100ae7de58b7ccb43ad9b83245f52898, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -252,7 +254,7 @@ Transform:
   m_GameObject: {fileID: 5264433319764711381}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.258, y: 0, z: 0}
+  m_LocalPosition: {x: -0.258, y: -0.019999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -314,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 6515953996071918762}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.254, y: 0, z: 0}
+  m_LocalPosition: {x: 0.254, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -340,7 +340,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpingPad
   <Type>k__BackingField: 6
+  selectedOutline: {fileID: 0}
   jumpPadDetection: {fileID: 7449313787257407920}
   direction: {x: 0, y: 1, z: 0}
   force: 15
   duration: 0.5
+  bounceSound: {fileID: 8300000, guid: c8dd98c7a59c3964bb78d85c11b574ed, type: 3}

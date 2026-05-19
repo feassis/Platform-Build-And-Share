@@ -8,6 +8,7 @@ public class FloorTrap : Interactables
 
     [SerializeField] private float activeStateDuration = 2f;
     [SerializeField] private float cooldownDuration = 2f;
+    [SerializeField] private AudioClip dangerSound;
 
     private const string IdleAnim = "idle";
     private const string ActivationAnim = "activating";
@@ -52,6 +53,7 @@ public class FloorTrap : Interactables
     {
         currentMode = TrapMode.Activating;
 
+        SoundManager.Instance.PlaySFX(dangerSound, transform.position);
         trapAnimator.Play(ActivationAnim);
 
         yield return CoroutineManager.Instance.WaitForAnimation(trapAnimator, ActivationAnim, () => { });

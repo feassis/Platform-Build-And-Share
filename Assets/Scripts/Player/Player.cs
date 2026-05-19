@@ -3,6 +3,7 @@ using UnityEngine.Rendering;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private AudioClip deathSound;
     protected PlayerMovement playerMovement;
     protected SpawnFlag spawnFlag;
 
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
 
     public void Death()
     {
+        SoundManager.Instance.PlaySFX(deathSound, transform.position);
         spawnFlag.Respawn(this);
     }
 }

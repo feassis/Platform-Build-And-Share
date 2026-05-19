@@ -8,6 +8,8 @@ public class JumpingPad : Interactables
     [SerializeField] private float force;
     [SerializeField] private float duration = 0.3f;
 
+    [SerializeField] private AudioClip bounceSound;
+
     private void Awake()
     {
         jumpPadDetection.OnPlayerEnter += JumpPadDetection_OnPlayerEnter;
@@ -20,5 +22,6 @@ public class JumpingPad : Interactables
         PlayerMovement pMov = player.gameObject.GetComponent<PlayerMovement>();
 
         pMov.Bounce(direction.normalized * force, duration);
+        SoundManager.Instance.PlaySFX(bounceSound, transform.position);
     }
 }

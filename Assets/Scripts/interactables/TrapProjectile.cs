@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TrapProjectile : MonoBehaviour
 {
+    
     private float speed;
     private float lifetime;
     private Vector3 dir;

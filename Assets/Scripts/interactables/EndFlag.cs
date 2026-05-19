@@ -4,6 +4,8 @@ public class EndFlag : Interactables
 {
     public static EndFlag Instance;
 
+    [SerializeField] private AudioClip winSound;
+
     private Player player;
 
 
@@ -27,6 +29,7 @@ public class EndFlag : Interactables
         if(collision.TryGetComponent<Player>(out player))
         {
             LevelManager.Instance.EndGameLoop(EndGameType.Victory);
+            SoundManager.Instance.PlaySFX(winSound, transform.position);
         }
     }
 }
